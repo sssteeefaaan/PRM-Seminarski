@@ -3,9 +3,30 @@ import requests
 import xml.etree.ElementTree as ET
 from sys import setrecursionlimit
 from urllib.request import urlopen
+import os
 
 downloadLoc = 'downloads/'
+dataLoc = 'data/'
 setrecursionlimit(1000000)
+
+if not os.path.exists(downloadLoc):
+    os.mkdir(downloadLoc)
+    
+if not os.path.exists(dataLoc):
+    os.mkdir(dataLoc)
+   
+def downloadXMLFiles(urls): 
+    files = []
+    for url in urls:
+        name = (downloadLoc + " ".join(url.split("/")[-4:])).replace("_", "-")
+        if not os.path.exists(name):
+                print(f'Downloading \'{url}\'')
+                data = requests.get(url).content
+                with open(name, 'wb') as f:
+                        f.write(data)
+                print('Done')
+        files.append(name)
+    return files
 
 def getFileNameFromUrl(url):
     return downloadLoc + "-".join(url.split('/')[-4:])
@@ -77,7 +98,7 @@ def parseXMLFromUrl(url):
     return parsedRows
     
 def savetoCSV(parsedData, fileName):
-	with open(fileName, 'w') as csvfile:
+	with open(dataLoc + fileName + ".csv", 'w') as csvfile:
 		writer = csv.DictWriter(csvfile, fieldnames = parsedData[0].keys())
 		writer.writeheader()
 		writer.writerows(parsedData)

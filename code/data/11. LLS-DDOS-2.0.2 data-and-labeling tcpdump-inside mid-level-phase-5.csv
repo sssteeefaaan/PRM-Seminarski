@@ -1,0 +1,6 @@
+alertid,date,time,sessionduration,spoofed,category,address,sport,Address category,Address address,dport,Service name,impact,version,Alert version,ident,name
+182,04/16/2000,16:04:43,00:08:08,unknown,ipv4-addr,202.77.162.213,34888,ipv4-addr,172.16.115.20,23,tcp,unknown,0.1,1,tcpdump_inside,tcpdump_inside
+183,04/16/2000,16:05:09,00:00:29,unknown,ipv4-addr,172.16.115.20,32844,ipv4-addr,172.16.112.50,23,tcp,unknown,0.1,1,tcpdump_inside,tcpdump_inside
+184,04/16/2000,16:05:36,00:00:00,unknown,ipv4-addr,172.16.112.50,33370,ipv4-addr,172.16.115.20,9325,udp,unknown,0.1,1,tcpdump_inside,tcpdump_inside
+185,04/16/2000,16:06:15,00:00:00,unknown,ipv4-addr,172.16.115.20,33387,ipv4-addr,172.16.112.50,7983,udp,unknown,0.1,1,tcpdump_inside,tcpdump_inside
+186,04/16/2000,16:06:15,00:00:00,unknown,ipv4-addr,172.16.112.50,,ipv4-addr,172.16.115.20,,icmp-destination-unreachable,unknown,0.1,1,tcpdump_inside,tcpdump_inside

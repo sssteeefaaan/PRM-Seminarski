@@ -22,11 +22,11 @@ def dateCmp(a, b):
     if a == b:
         return 1
     
-    if not a or not b:
+    if (not a) or (not b):
         return 0
     
-    aD = dt.datetime.strptime(a, '%d%m%y')
-    bD = dt.datetime.strptime(b, '%d%m%y')
+    aD = dt.datetime.strptime(a, '%m/%d/%Y')
+    bD = dt.datetime.strptime(b, '%m/%d/%Y')
     delta = aD.__sub__(bD).__abs__()
     
     return 1 / (1 << (delta.days << 1))
@@ -35,7 +35,7 @@ def timeCmp(a, b):
     if a == b:
         return 1
     
-    if not a or not b:
+    if (not a) or (not b):
         return 0
     
     aD = dt.datetime.strptime(a, '%H:%M:%S')
@@ -51,7 +51,7 @@ def sessionCmp(a, b):
     if a == b:
         return 1
     
-    if not a or not b:
+    if (not a) or (not b):
         return 0
     
     aD = dt.datetime.strptime(a, '%H:%M:%S')
@@ -75,7 +75,7 @@ def addressCmp(a, b):
     if a == b:
         return 1
     
-    if not a or not b:
+    if (not a) or (not b):
         return 0
     
     ipA = ip.ip_address(a)
@@ -89,7 +89,17 @@ def portCmp(a, b):
     if a == b:
         return 1
     
-    if not a or not b:
+    if (not a) or (not b):
         return 0
     
     return 1 / abs(int(a) - int(b))
+
+funcs = {
+    "F":F,
+    "equals":equals,
+    "dateCmp":dateCmp,
+    "timeCmp":timeCmp,
+    "sessionCmp":sessionCmp,
+    "addressCmp": addressCmp,
+    "portCmp": portCmp
+}
