@@ -30,73 +30,73 @@
             "h": "equals",
             "xml_parser": "spoofed"
         },
-        "src_addr_category":  {
+        "src_addr_category": {
             "use": true,
             "c": 0.02,
             "h": "equals",
             "xml_parser": "category"
         },
-        "src_ip_address":  {
+        "src_ip_address": {
             "use": true,
             "c": 0.2,
             "h": "addressCmp",
             "xml_parser": "address"
         },
-        "src_port":  {
+        "src_port": {
             "use": true,
             "c": 0.15,
             "h": "portCmp",
             "xml_parser": "sport"
         },
-        "dst_addr_category":  {
+        "dst_addr_category": {
             "use": true,
             "c": 0.02,
             "h": "equals",
             "xml_parser": "Address category"
         },
-        "dst_ip_address":  {
+        "dst_ip_address": {
             "use": true,
             "c": 0.1,
             "h": "addressCmp",
             "xml_parser": "Address address"
         },
-        "dst_port":  {
+        "dst_port": {
             "use": true,
             "c": 0.1,
             "h": "portCmp",
             "xml_parser": "dport"
         },
-        "service_name":  {
+        "service_name": {
             "use": true,
             "c": 0.15,
             "h": "equals",
             "xml_parser": "Service name"
         },
-        "impact":  {
+        "impact": {
             "use": true,
             "c": 0.02,
             "h": "equals",
             "xml_parser": "impact"
         },
-        "message_version":  {
+        "message_version": {
             "use": false,
             "c": 0,
             "h": "equals",
             "xml_parser": "version"
         },
-        "alert_version":  {
+        "alert_version": {
             "use": false,
             "c": 0,
             "h": "equals",
             "xml_parser": "Alert version"
         },
-        "analyzer_identificator":  {
+        "analyzer_identificator": {
             "use": false,
             "c": 0,
             "h": "equals",
             "xml_parser": "ident"
         },
-        "analyzer_name":  {
+        "analyzer_name": {
             "use": false,
             "c": 0,
             "h": "equals",
@@ -107,12 +107,45 @@
         "t": 0.65,
         "refresh_rate": 0.01,
         "fifo_count": 100,
-        "node_colors": [],
+        "node_colors": [
+            "#FFFF00",
+            "#66CDAA",
+            "#6495ED",
+            "#DD0000",
+            "#FF1493",
+            "#FEE4C4",
+            "#5F9EA0",
+            "#808080",
+            "#FFD700",
+            "#32CD32",
+            "#ADD8E6",
+            "#FF7F50",
+            "#BA55D3",
+            "#DEB887",
+            "#DB7093",
+            "#A0ACA0",
+            "#DAA520",
+            "#9ACD32",
+            "#4169E1",
+            "#CD5C5C",
+            "#DD00DD",
+            "#A53A2A",
+            "#778899",
+            "#CFD5C5",
+            "#EEE8AA",
+            "#40E0D0",
+            "#1E90FF",
+            "#DC143C",
+            "#D8BFD8",
+            "#B8860B",
+            "#F0F890",
+            "#505050"
+        ],
         "layout_types": [
             "kamada",
             "spring"
         ],
-        "layout_ind": 0
+        "layout_ind": 1
     },
     "data_source": {
         "urls": [
