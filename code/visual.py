@@ -8,18 +8,19 @@ from xmlparser import *
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, thread
 from threading import Thread
 from multiprocessing import Process
+import datetime as dt
 
 
-# , t=0.5, refresh_rate=0.01, fifo_count=100, node_colors=[], layout_ind=0):
-def visualizeDataFileArray(urls, attributes, c, h, display={}):
-    files = downloadXMLFiles(urls)
+def visualize(attributes, c, h, data_source={}, display={}, optional={}):
+    files = data_source['files'] + downloadXMLFiles(
+        data_source['urls'], downloadLoc=data_source['download_location'])
 
 #
     t = display['t'] if display['t'] else 0.5
     refresh_rate = display['refresh_rate'] if display['refresh_rate'] else 0.0001
     fifo_count = display['fifo_count'] if display['fifo_count'] else 100
     node_colors = display['node_colors'] if display['node_colors'] else []
-    layout_ind = display['layout_ind'] if display['layout_ind'] else 0
+    # layout_ind = display['layout_ind'] if display['layout_ind'] else 0
 #
     G = nx.Graph()
     A = []
@@ -69,22 +70,22 @@ def visualizeDataFileArray(urls, attributes, c, h, display={}):
             partial.append(a)
             A.append(a)
 
-            if layout_ind == 0:
-                mypos = nx.kamada_kawai_layout(G)
-            elif layout_ind == 1:
-                # , scale=0.75, center=(0,0), fixed=None)
-                mypos = nx.spring_layout(G, k=1, seed=100, pos=mypos)
+            # mypos = nx.drawing.nx_agraph.graphviz_layout(G)
+            # mypos = nx.drawing.nx_pydot.graphviz_layout(G, prog="twopi")
+            # mypos = nx.spring_layout(G, k=1, seed=100, pos=mypos)
+            # mypos = nx.kamada_kawai_layout(G)
 
             nx.draw_networkx(G, pos=mypos, node_color=color_map)
             plt.title(name)
             plt.pause(refresh_rate)
             plt.clf()
 
-        savetoCSV(list(map(lambda x: x.dict, partial)), str(i) + '. ' + name)
+        savetoCSV(list(map(lambda x: x.dict, partial)),
+                  dt.datetime.now().strftime("%d/%m/%Y@%h-%m-%s"), dataLoc=optional['csv']['location'])
         i = (i + 1) % len(node_colors)
 
     th1 = Thread(target=savetoCSV, args=[
-                 list(map(lambda x: x.dict, A)), 'Data'])
+                 list(map(lambda x: x.dict, A)), 'Data'], kwargs={"dataLoc": optional['csv']['location']})
     th1.start()
 
     clusters = list(nx.find_cliques(G))

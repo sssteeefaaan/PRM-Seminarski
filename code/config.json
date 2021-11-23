@@ -141,11 +141,23 @@
             "#F0F890",
             "#505050"
         ],
-        "layout_types": [
-            "kamada",
-            "spring"
-        ],
-        "layout_ind": 1
+        "chosen_layout": "spring",
+        "layout_types": {
+            "circular": {
+                "scale": 1,
+                "center": 1,
+                "dim": 1
+            },
+            "bipartite": {},
+            "kamada_kawai": {},
+            "multipartite": {},
+            "planar": {},
+            "random": {},
+            "shell": {},
+            "spectral": {},
+            "spiral": {},
+            "spring": {}
+        }
     },
     "data_source": {
         "urls": [
@@ -170,10 +182,17 @@
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_2.0.2/data_and_labeling/tcpdump_dmz/mid-level-phase-4.xml",
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_2.0.2/data_and_labeling/tcpdump_dmz/mid-level-phase-5.xml"
         ],
+        "download_location": "downloads/",
         "files": []
     },
     "optional": {
-        "generate_csv": true,
-        "generate_snapshot": true
+        "csv": {
+            "generate": true,
+            "location": "data/"
+        },
+        "snapshot": {
+            "generate": true,
+            "location": "snapshot/"
+        }
     }
 }
