@@ -48,6 +48,9 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
         parsedData = parseXML(file)
 
         for row in parsedData:
+            
+            print(id)
+            
             label = dt.datetime.now().strftime("%d. %B %Y @ %H-%M-%S-%f ms")
             row['alertid'] = id = id + 1
             a = Alert(attributes, row)
