@@ -105,8 +105,8 @@
     },
     "display": {
         "t": 0.65,
-        "refresh_rate": 0.01,
-        "fifo_count": 100,
+        "refresh_rate": 0.0001,
+        "fifo_count": 50,
         "node_colors": [
             "#FFFF00",
             "#66CDAA",
@@ -141,22 +141,116 @@
             "#F0F890",
             "#505050"
         ],
-        "chosen_layout": "spring",
+        "chosen_layout": "graphviz",
         "layout_types": {
+            "bipartite": {
+                "align": {
+                    "options": [
+                        "vertical",
+                        "horizontal"
+                    ],
+                    "chosen": 1
+                },
+                "scale": 1,
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                },
+                "aspect_ratio": 1.333
+            },
             "circular": {
                 "scale": 1,
-                "center": 1,
-                "dim": 1
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                }
             },
-            "bipartite": {},
-            "kamada_kawai": {},
-            "multipartite": {},
-            "planar": {},
-            "random": {},
-            "shell": {},
-            "spectral": {},
-            "spiral": {},
-            "spring": {}
+            "graphviz": {
+                "prog": {
+                    "options": [
+                        "neato",
+                        "twopi",
+                        "fdp",
+                        "sfdp",
+                        "dot",
+                        "circo"
+                    ],
+                    "chosen": 1
+                },
+                "root": "None"
+            },
+            "kamada_kawai": {
+                "scale": 1,
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                }
+            },
+            "random": {
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                },
+                "seed": 100
+            },
+            "shell": {
+                "scale": 1,
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                },
+                "rotate": 3.14
+            },
+            "spectral": {
+                "scale": 1,
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                }
+            },
+            "spiral": {
+                "scale": 1,
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                },
+                "equidistant": true
+            },
+            "spring": {
+                "scale": 1,
+                "center": {
+                    "options": [
+                        "None",
+                        "array-like"
+                    ],
+                    "chosen": 0
+                },
+                "k": 1,
+                "seed": 100,
+                "iterations": 50,
+                "threshold": 0.0001
+            }
         }
     },
     "data_source": {
@@ -183,7 +277,28 @@
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_2.0.2/data_and_labeling/tcpdump_dmz/mid-level-phase-5.xml"
         ],
         "download_location": "downloads/",
-        "files": []
+        "files": [
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-5.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-5.xml"
+        ]
     },
     "optional": {
         "csv": {
@@ -192,7 +307,9 @@
         },
         "snapshot": {
             "generate": true,
-            "location": "snapshot/"
+            "location": "snapshot/",
+            "format": "png",
+            "bbox_inches": "tight"
         }
     }
 }

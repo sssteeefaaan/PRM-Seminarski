@@ -1,3 +1,0 @@
-alertid,date,time,sessionduration,spoofed,category,address,sport,Address category,Address address,dport,Service name,impact,version,Alert version,ident,name
-187,04/16/2000,15:05:47,00:00:00,unknown,ipv4-addr,202.77.162.213,1334,ipv4-addr,172.16.115.20,53,udp,unknown,0.1,1,tcpdump_dmz,tcpdump_dmz
-188,04/16/2000,15:05:47,00:00:00,unknown,ipv4-addr,202.77.162.213,1335,ipv4-addr,172.16.115.20,53,udp,unknown,0.1,1,tcpdump_dmz,tcpdump_dmz
