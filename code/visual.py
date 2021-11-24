@@ -6,9 +6,11 @@ from xmlparser import os, downloadXMLFiles, parseXML, savetoCSV
 import datetime as dt
 from layout import layout_types
 
+
 def visualize(attributes, c, h, data_source={}, display={}, optional={}):
-    files = data_source['files'][1:]  + downloadXMLFiles(data_source['urls'], downloadLoc=data_source['download_location'])
-    
+    files = data_source['files'][1:] + downloadXMLFiles(
+        data_source['urls'], downloadLoc=data_source['download_location'])
+
     t = display['t'] if display['t'] else 0.5
     refresh_rate = display['refresh_rate'] if display['refresh_rate'] else 0.0001
     fifo_count = display['fifo_count'] if display['fifo_count'] else 100
@@ -17,10 +19,9 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
     ) else "graphviz"
     snapshot = optional['snapshot']
     csv = optional['csv']
-    
+
     if snapshot['generate'] and not os.path.exists(snapshot['location']):
         os.mkdir(snapshot['location'])
-
 
     G = nx.Graph()
     color_map = []
@@ -39,15 +40,16 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
 
     i = 0
     id = 0
-    counter = fifo_count
     mypos = None
     partial = []
     for file in files:
-        
+
         #name = file.replace(".xml", "").split("/")[-1]
         parsedData = parseXML(file)
 
         for row in parsedData:
+            print(id, row)
+
             label = dt.datetime.now().strftime("%d. %B %Y @ %H-%M-%S-%f ms")
             row['alertid'] = id = id + 1
             a = Alert(attributes, row)
@@ -55,13 +57,13 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
             G.add_nodes_from([(a.dict['alertid'])])
 
             max = [0, a]
-            
+
             for node in partial:
                 weight = F(a.vector, node.vector, c, h)
                 if weight >= t:
                     G.add_weighted_edges_from(
                         [(a.dict['alertid'], node.dict['alertid'], weight)])
-                    
+
                     if weight > max[0]:
                         max = [weight, node]
 
@@ -70,36 +72,37 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
                 i = (i + 1) % len(node_colors)
             else:
                 color_map.append(max[1].color)
-            
-            a.color=color_map[-1]
+
+            a.color = color_map[-1]
 
             mypos = layout_types[chosen_layout](
                 G, dict(display['layout_types'][chosen_layout]))
 
             nx.draw_networkx(G, pos=mypos, node_color=color_map)
             plt.title(label)
-            #plt.label(name)
+            # plt.label(name)
             plt.pause(refresh_rate)
             plt.clf()
-            
+
             partial.append(a)
 
-            counter -=1
+            counter -= 1
             if not counter:
                 counter = -1
-                
+
                 if snapshot['generate']:
-                    plt.savefig(snapshot['location'] + label, format=snapshot['format'], bbox_inches=snapshot['bbox_inches'])
+                    plt.savefig(
+                        snapshot['location'] + label, format=snapshot['format'], bbox_inches=snapshot['bbox_inches'])
                     counter = fifo_count
-                    
+
                 if csv['generate']:
                     savetoCSV(list(map(lambda x: x.dict, partial)),
-                            label, dataLoc=csv['location'])
+                              label, dataLoc=csv['location'])
                     counter = fifo_count
 
             if len(partial) == fifo_count:
                 head, *partial = partial
-                G.remove_node(head.dict['alertid'])
+                G.remove_nodes_from([head.dict['alertid']])
                 color_map = color_map[1:]
-                
+
             plt.clf()
