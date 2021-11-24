@@ -1,10 +1,12 @@
 import networkx as nx
 
-def bipartite(G:nx.Graph, d):
+
+def bipartite(G: nx.Graph, d):
     align = d['align']
     center = None if not d['center']['chosen'] else "array-like"
     return nx.drawing.layout.bipartite_layout(G, nodes=G.nodes, align=align['options'][align['chosen']], scale=d['scale'],
-                                       center=center, aspect_ratio=d['aspect_ratio'])
+                                              center=center, aspect_ratio=d['aspect_ratio'])
+
 
 def circular(G, d):
     center = None if not d['center']['chosen'] else "array-like"
