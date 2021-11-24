@@ -44,18 +44,12 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
     partial = []
     for file in files:
 
-        #name = file.replace(".xml", "").split("/")[-1]
+        name = file.replace(".xml", "").split("/")[-1]
         parsedData = parseXML(file)
 
         for row in parsedData:
-<<<<<<< HEAD
-            
             print(id)
-            
-=======
-            print(id, row)
 
->>>>>>> 4800695c4d2e184dc10034238691a67119fa4778
             label = dt.datetime.now().strftime("%d. %B %Y @ %H-%M-%S-%f ms")
             row['alertid'] = id = id + 1
             a = Alert(attributes, row)
@@ -68,7 +62,7 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
                 weight = F(a.vector, node.vector, c, h)
                 if weight >= t:
                     G.add_weighted_edges_from(
-                        [(a.dict['alertid'], node.dict['alertid'], weight)])
+                        [(node.dict['alertid'], a.dict['alertid'], weight)])
 
                     if weight > max[0]:
                         max = [weight, node]
@@ -84,27 +78,39 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
             mypos = layout_types[chosen_layout](
                 G, dict(display['layout_types'][chosen_layout]))
 
-            nx.draw_networkx(G, pos=mypos, node_color=color_map)
+            nx.draw_networkx(G,
+                             pos=mypos,
+                             node_color=color_map,
+                             arrows=display['arrows'] if display['arrows'] != "None" else None,
+                             arrowstyle=display['arrowstyle'],
+                             arrowsize=display['arrowsize'],
+                             with_labels=display['with_labels'],
+                             node_size=display['node_size'],
+                             node_shape=display['node_shape']['chosen'],
+                             style=display['style'],
+                             font_size=display['font_size'],
+                             font_color=display['font_color'],
+                             font_weight=display['font_weight'],
+                             font_family=display['font_family'])
+            
             plt.title(label)
             # plt.label(name)
             plt.pause(refresh_rate)
-            plt.clf()
 
             partial.append(a)
 
-            counter -= 1
-            if not counter:
-                counter = -1
+            if not id % fifo_count:
 
                 if snapshot['generate']:
                     plt.savefig(
-                        snapshot['location'] + label, format=snapshot['format'], bbox_inches=snapshot['bbox_inches'])
-                    counter = fifo_count
+                        fname=snapshot['location'] + label + '.' + snapshot['format'],
+                        format=snapshot['format'],
+                        bbox_inches=snapshot['bbox_inches'])#,
+                        #dpi=snapshot['dpi'])
 
                 if csv['generate']:
                     savetoCSV(list(map(lambda x: x.dict, partial)),
                               label, dataLoc=csv['location'])
-                    counter = fifo_count
 
             if len(partial) == fifo_count:
                 head, *partial = partial
