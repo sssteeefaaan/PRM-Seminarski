@@ -16,7 +16,7 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
     fifo_count = display['fifo_count'] if display['fifo_count'] else 100
     node_colors = display['node_colors'] if display['node_colors'] else []
     chosen_layout = display['chosen_layout'] if display['chosen_layout'] in layout_types.keys(
-    ) else "graphviz"
+    ) else "spring"
     snapshot = optional['snapshot']
     csv = optional['csv']
 
@@ -48,7 +48,6 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
         parsedData = parseXML(file)
 
         for row in parsedData:
-            print(id)
 
             label = dt.datetime.now().strftime("%d. %B %Y @ %H-%M-%S-%f ms")
             row['alertid'] = id = id + 1
