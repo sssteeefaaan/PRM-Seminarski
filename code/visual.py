@@ -5,35 +5,27 @@ from compareFuncs import *
 from xmlparser import os, downloadXMLFiles, parseXML, savetoCSV
 import datetime as dt
 from layout import layout_types
+from unload import *
 
 
-def visualize(attributes, c, h, data_source={}, display={}, optional={}):
-    files = data_source['files'][1:] + downloadXMLFiles(
-        data_source['urls'], downloadLoc=data_source['download_location'])
+def visualize(attributes={}, data_source={}, display={}, optional={}):
 
-    t = display['t'] if display['t'] else 0.5
-    refresh_rate = display['refresh_rate'] if display['refresh_rate'] else 0.0001
-    fifo_count = display['fifo_count'] if display['fifo_count'] else 100
-    node_colors = display['node_colors'] if display['node_colors'] else []
-    chosen_layout = display['chosen_layout'] if display['chosen_layout'] in layout_types.keys(
-    ) else "spring"
-    snapshot = optional['snapshot']
-    csv = optional['csv']
-
-    if snapshot['generate'] and not os.path.exists(snapshot['location']):
-        os.mkdir(snapshot['location'])
+    (attr, c, h) = unloadAttributes(attributes)
+    files = unloadDataSource(data_source)
+    disp = unloadDisplay(display)
+    (snapshot, csv) = unloadOptional(optional)
 
     G = nx.Graph()
     color_map = []
 
     mng = plt.get_current_fig_manager()
-    mng.set_window_title('Vizualizacija klasterizacije IDS alerta')
+    mng.set_window_title(disp['window_name'])
     fig = plt.figure(1)
 
     def on_key(event):
-        if event.key == ' ':
+        if event.key == disp['pause_key']:
             fig.canvas.start_event_loop(0)
-        if event.key == 'escape':
+        if event.key == disp['unpause_key']:
             fig.canvas.stop_event_loop()
 
     fig.canvas.mpl_connect('key_release_event', on_key)
@@ -51,7 +43,7 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
 
             label = dt.datetime.now().strftime("%d. %B %Y @ %H-%M-%S-%f ms")
             row['alertid'] = id = id + 1
-            a = Alert(attributes, row)
+            a = Alert(attr, row)
 
             G.add_nodes_from([(a.dict['alertid'])])
 
@@ -59,7 +51,7 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
 
             for node in partial:
                 weight = F(a.vector, node.vector, c, h)
-                if weight >= t:
+                if weight >= disp['t']:
                     G.add_weighted_edges_from(
                         [(node.dict['alertid'], a.dict['alertid'], weight)])
 
@@ -67,51 +59,51 @@ def visualize(attributes, c, h, data_source={}, display={}, optional={}):
                         max = [weight, node]
 
             if max[1].dict['alertid'] == a.dict['alertid']:
-                color_map.append(node_colors[i])
-                i = (i + 1) % len(node_colors)
+                color_map.append(disp['node_colors'][i])
+                i = (i + 1) % len(disp['node_colors'])
             else:
                 color_map.append(max[1].color)
 
             a.color = color_map[-1]
 
-            mypos = layout_types[chosen_layout](
-                G, dict(display['layout_types'][chosen_layout]))
+            mypos = layout_types[disp['layout']['name']](
+                G, dict(disp['layout']))
 
             nx.draw_networkx(G,
                              pos=mypos,
                              node_color=color_map,
-                             arrows=display['arrows'] if display['arrows'] != "None" else None,
-                             arrowstyle=display['arrowstyle'],
-                             arrowsize=display['arrowsize'],
-                             with_labels=display['with_labels'],
-                             node_size=display['node_size'],
-                             node_shape=display['node_shape']['chosen'],
-                             style=display['style'],
-                             font_size=display['font_size'],
-                             font_color=display['font_color'],
-                             font_weight=display['font_weight'],
-                             font_family=display['font_family'])
-            
+                             arrows=disp['arrows'],
+                             arrowstyle=disp['arrow_style'],
+                             arrowsize=disp['arrow_size'],
+                             with_labels=disp['with_labels'],
+                             node_size=disp['node_size'],
+                             node_shape=disp['node_shape'],
+                             style=disp['style'],
+                             font_size=disp['font_size'],
+                             font_color=disp['font_color'],
+                             font_weight=disp['font_weight'],
+                             font_family=disp['font_family'])
+
             plt.title(label)
             # plt.label(name)
-            plt.pause(refresh_rate)
+            plt.pause(disp['refresh_rate'])
 
             partial.append(a)
 
-            if not id % fifo_count:
-
+            if not id % disp['fifo_count']:
                 if snapshot['generate']:
                     plt.savefig(
-                        fname=snapshot['location'] + label + '.' + snapshot['format'],
+                        fname=snapshot['location'] +
+                        label + '.' + snapshot['format'],
                         format=snapshot['format'],
-                        bbox_inches=snapshot['bbox_inches'])#,
-                        #dpi=snapshot['dpi'])
+                        bbox_inches=snapshot['bbox_inches'])  # ,
+                    # dpi=snapshot['dpi'])
 
                 if csv['generate']:
                     savetoCSV(list(map(lambda x: x.dict, partial)),
                               label, dataLoc=csv['location'])
 
-            if len(partial) == fifo_count:
+            if len(partial) == disp['fifo_count']:
                 head, *partial = partial
                 G.remove_nodes_from([head.dict['alertid']])
                 color_map = color_map[1:]

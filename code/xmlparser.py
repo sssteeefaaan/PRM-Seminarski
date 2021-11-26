@@ -7,28 +7,37 @@ import os
 
 setrecursionlimit(1000000)
 
+def checkDir(dir):
+    if not os.path.exists(dir):
+        print(f"Path '{dir}' doesn't exist!")
+        os.mkdir(dir)
+        print(str.format("Path '{dir}' created!"))
+
+
 def downloadXMLFiles(urls, downloadLoc='downloads/'):
-
-    if not os.path.exists(downloadLoc):
-        os.mkdir(downloadLoc)
-
+    checkDir(downloadLoc)
     files = []
     for url in urls:
         name = (downloadLoc + " ".join(url.split("/")[-4:])).replace("_", "-")
         if not os.path.exists(name):
             print(f'Downloading \'{url}\'')
-            data = requests.get(url).content
-            with open(name, 'wb') as f:
-                f.write(data)
-            print('Done')
+            try:
+                data = requests.get(url).content
+                with open(name, 'wb') as f:
+                    f.write(data)
+                print('Done')
+            except BaseException as err:
+                er = err.__str__()
+                print(
+                    f"Error '{er}' occurred while downloading '{url}'! Skipping")
+        else:
+            print(f"File '{name}' exists! Skipping...")
         files.append(name)
     return files
 
 
 def getFileNameFromUrl(url, downloadLoc='downloads/'):
-    if not os.path.exists(downloadLoc):
-        os.mkdir(downloadLoc)
-
+    checkDir(downloadLoc)
     return downloadLoc + "-".join(url.split('/')[-4:])
 
 
@@ -40,10 +49,15 @@ def downloadXMLRawData(url, fileName=""):
 
 
 def downloadXML(url, fileName=""):
-    (data, name) = downloadXMLRawData(url, fileName)
-    with open(name, 'wb') as f:
-        f.write(data)
-
+    name = ""
+    try:
+        (data, name) = downloadXMLRawData(url, fileName)
+        with open(name, 'wb') as f:
+            f.write(data)
+    except BaseException as err:
+        er = err.__str__()
+        print(
+            f"Error '{er}' occurred while downloading '{url}'! Skipping")
     return name.removesuffix(".xml")
 
 
@@ -73,36 +87,47 @@ def parsRec(parsed, x, depth=0, parents=[]):
 
 
 def parseXML(xmlfile):
-    tree = ET.parse(xmlfile)
-    root = tree.getroot()
     parsedRows = []
+    try:
+        tree = ET.parse(xmlfile)
+        root = tree.getroot()
+        for x in root:
+            parsedRows.append({})
+            parsRec(parsedRows[-1], x)
 
-    for x in root:
-        parsedRows.append({})
-        parsRec(parsedRows[-1], x)
+    except BaseException as err:
+        er = err.__str__()
+        print(f"Error '{er}' occurred! Skipping '{xmlfile}' ...")
 
     return parsedRows
 
 
 def parseXMLFromUrl(url):
-    with urlopen(url) as xmlFile:
-        tree = ET.parse(xmlFile)
-        root = tree.getroot()
-        parsedRows = []
+    parsedRows = []
+    try:
+        with urlopen(url) as xmlFile:
+            tree = ET.parse(xmlFile)
+            root = tree.getroot()
+            for x in root:
+                parsedRows.append({})
+                parsRec(parsedRows[-1], x)
 
-        for x in root:
-            parsedRows.append({})
-            parsRec(parsedRows[-1], x)
+    except BaseException as err:
+        er = err.__str__()
+        print(f"Error '{er}' occurred! Skipping '{url}' ...")
 
     return parsedRows
 
 
 def savetoCSV(parsedData, fileName, dataLoc='data/'):
+    checkDir(dataLoc)
 
-    if not os.path.exists(dataLoc):
-        os.mkdir(dataLoc)
-
-    with open(dataLoc + fileName + ".csv", 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=parsedData[0].keys())
-        writer.writeheader()
-        writer.writerows(parsedData)
+    try:
+        with open(dataLoc + fileName + ".csv", 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=parsedData[0].keys())
+            writer.writeheader()
+            writer.writerows(parsedData)
+    except BaseException as err:
+        er = err.__str__()
+        print(
+            f"Error '{er}' occurred! Skipping csv saving of '{fileName}' ...")

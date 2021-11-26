@@ -1,18 +1,19 @@
 from visual import visualize
-from compareFuncs import *
+from compareFuncs import funcs
 import json
 
 
 def main():
-    with open('config.json') as f:
-        config = json.load(f)
+    try:
+        with open('config.json') as f:
+            config = json.load(f)
 
-    cmpMeta = [(config['attributes'][x]['xml_parser'], config['attributes'][x]['c'], funcs[config['attributes'][x]['h']['options'][config['attributes'][x]['h']['chosen']]])
-               for x in config['attributes'] if config['attributes'][x]['use']]
+        visualize(attributes=config['attributes'], data_source=config['data_source'],
+                  display=config['display'], optional=config['optional'])
 
-    (a, c, h) = zip(*cmpMeta)
-    visualize(
-        a, c, h, data_source=config['data_source'], display=config['display'], optional=config['optional'])
+    except BaseException as e:
+        print("Error occurred:", e)
+
 
 if __name__ == '__main__':
     main()

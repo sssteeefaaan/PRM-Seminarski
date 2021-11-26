@@ -83,7 +83,7 @@
         "src_addr_category": {
             "use": true,
             "c": 0.02,
-            "h":{
+            "h": {
                 "options": [
                     "equals",
                     "dateCmp",
@@ -275,7 +275,10 @@
     },
     "display": {
         "t": 0.65,
+        "window_name": "Vizualizacija klasterizacije IDS alerta",
         "refresh_rate": 0.001,
+        "pause_key": " ",
+        "unpause_key": "escape",
         "fifo_count": 50,
         "node_colors": [
             "#FFFF00",
@@ -311,88 +314,132 @@
             "#F0F890",
             "#505050"
         ],
-        "arrows": false,
-        "arrowstyle": "-|>",
-        "arrowsize": 10,
+        "arrows": "None",
+        "arrow_style": {
+            "options": {
+                "curve": "-",
+                "curve_A": "<-",
+                "curve_B": "->",
+                "curve_AB": "<->",
+                "curve_filled_A": "<|-",
+                "curve_filled_B": "-|>",
+                "curve_filled_AB": "<|-|>",
+                "bracket_A": "]-",
+                "bracket_B": "-[",
+                "bracket_AB": "]-[",
+                "bar_AB": "|-|",
+                "bracket_curve": "]->",
+                "cruve_bracket": "<-[",
+                "simple": "simple",
+                "fancy": "fancy",
+                "wedge": "wedge"
+            },
+            "chosen": "curve_filled_B"
+        },
+        "arrow_size": 10,
         "with_labels": true,
         "node_size": 400,
         "node_shape": {
-            "options": [
-                "s",
-                "o",
-                "^",
-                ">",
-                "v",
-                "<",
-                "d",
-                "p",
-                "h",
-                "8"
-            ],
-            "chosen": "h"
+            "options": {
+                "square": "s",
+                "circle": "o",
+                "triangle_up": "^",
+                "triangle_right": ">",
+                "triangle_down": "v",
+                "triangle_left": "<",
+                "diamond": "d",
+                "pentagon": "p",
+                "hexagon": "h",
+                "octagon": "8"
+            },
+            "chosen": "circle"
         },
         "style": "solid",
         "font_size": 10,
         "font_color": "k",
         "font_weight": "normal",
         "font_family": "sans-serif",
-        "chosen_layout": "spring",
-        "layout_types": {
-            "bipartite": {
-                "align": {
-                    "options": [
-                        "vertical",
-                        "horizontal"
-                    ],
-                    "chosen": 1
+        "layout": {
+            "options": {
+                "bipartite": {
+                    "align": {
+                        "options": [
+                            "vertical",
+                            "horizontal"
+                        ],
+                        "chosen": 1
+                    },
+                    "scale": 1,
+                    "aspect_ratio": 1.333
                 },
-                "scale": 1,
-                "aspect_ratio": 1.333
-            },
-            "circular": {
-                "scale": 1
-            },
-            "graphviz": {
-                "prog": {
-                    "options": [
-                        "neato",
-                        "twopi",
-                        "fdp",
-                        "sfdp",
-                        "dot",
-                        "circo"
-                    ],
-                    "chosen": 0
+                "circular": {
+                    "scale": 1
                 },
-                "root": "None"
+                "graphviz": {
+                    "prog": {
+                        "options": [
+                            "neato",
+                            "twopi",
+                            "fdp",
+                            "sfdp",
+                            "dot",
+                            "circo"
+                        ],
+                        "chosen": 0
+                    },
+                    "root": "None"
+                },
+                "kamada_kawai": {
+                    "scale": 1
+                },
+                "random": {
+                    "seed": 100
+                },
+                "shell": {
+                    "scale": 1,
+                    "rotate": 3.14
+                },
+                "spectral": {
+                    "scale": 1
+                },
+                "spiral": {
+                    "scale": 1,
+                    "equidistant": true
+                },
+                "spring": {
+                    "scale": 1,
+                    "k": 1,
+                    "seed": 100,
+                    "iterations": 50,
+                    "threshold": 0.0001
+                }
             },
-            "kamada_kawai": {
-                "scale": 1
-            },
-            "random": {
-                "seed": 100
-            },
-            "shell": {
-                "scale": 1,
-                "rotate": 3.14
-            },
-            "spectral": {
-                "scale": 1
-            },
-            "spiral": {
-                "scale": 1,
-                "equidistant": true
-            },
-            "spring": {
-                "scale": 1,
-                "k": 1,
-                "seed": 100,
-                "iterations": 50,
-                "threshold": 0.0001
-            }
+            "chosen": "spring"
         }
     },
     "data_source": {
+        "files": [
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-5.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
+            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-5.xml"
+        ],
         "urls": [
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_1.0/data_and_labeling/tcpdump_dmz/mid-level-phase-1.xml",
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_1.0/data_and_labeling/tcpdump_dmz/mid-level-phase-2.xml",
@@ -415,29 +462,7 @@
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_2.0.2/data_and_labeling/tcpdump_dmz/mid-level-phase-4.xml",
             "https://archive.ll.mit.edu/ideval/data/2000/LLS_DDOS_2.0.2/data_and_labeling/tcpdump_dmz/mid-level-phase-5.xml"
         ],
-        "download_location": "downloads/",
-        "files": [
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-5.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
-            "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-inside mid-level-phase-5.xml"
-        ]
+        "download_location": "downloads/"
     },
     "optional": {
         "csv": {
