@@ -3,109 +3,279 @@
         "alert_id": {
             "use": true,
             "c": 0,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "alertid"
         },
         "date": {
             "use": true,
             "c": 0.12,
-            "h": "dateCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 1
+            },
             "xml_parser": "date"
         },
         "time": {
             "use": true,
             "c": 0.08,
-            "h": "timeCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 2
+            },
             "xml_parser": "time"
         },
         "session_duration": {
             "use": true,
             "c": 0.02,
-            "h": "sessionCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 3
+            },
             "xml_parser": "sessionduration"
         },
         "src_addr_spoofed": {
             "use": true,
             "c": 0.02,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "spoofed"
         },
         "src_addr_category": {
             "use": true,
             "c": 0.02,
-            "h": "equals",
+            "h":{
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "category"
         },
         "src_ip_address": {
             "use": true,
             "c": 0.2,
-            "h": "addressCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 4
+            },
             "xml_parser": "address"
         },
         "src_port": {
             "use": true,
             "c": 0.15,
-            "h": "portCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 5
+            },
             "xml_parser": "sport"
         },
         "dst_addr_category": {
             "use": true,
             "c": 0.02,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "Address category"
         },
         "dst_ip_address": {
             "use": true,
             "c": 0.1,
-            "h": "addressCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 4
+            },
             "xml_parser": "Address address"
         },
         "dst_port": {
             "use": true,
             "c": 0.1,
-            "h": "portCmp",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 5
+            },
             "xml_parser": "dport"
         },
         "service_name": {
             "use": true,
             "c": 0.15,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "Service name"
         },
         "impact": {
             "use": true,
             "c": 0.02,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "impact"
         },
         "message_version": {
             "use": false,
             "c": 0,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "version"
         },
         "alert_version": {
             "use": false,
             "c": 0,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "Alert version"
         },
         "analyzer_identificator": {
             "use": false,
             "c": 0,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "ident"
         },
         "analyzer_name": {
             "use": false,
             "c": 0,
-            "h": "equals",
+            "h": {
+                "options": [
+                    "equals",
+                    "dateCmp",
+                    "timeCmp",
+                    "sessionCmp",
+                    "addressCmp",
+                    "portCmp"
+                ],
+                "chosen": 0
+            },
             "xml_parser": "name"
         }
     },
     "display": {
         "t": 0.65,
-        "refresh_rate": 0.000001,
+        "refresh_rate": 0.001,
         "fifo_count": 50,
         "node_colors": [
             "#FFFF00",
@@ -147,7 +317,18 @@
         "with_labels": true,
         "node_size": 400,
         "node_shape": {
-            "options": ["s", "o", "^", ">", "v", "<", "d", "p", "h", "8"],
+            "options": [
+                "s",
+                "o",
+                "^",
+                ">",
+                "v",
+                "<",
+                "d",
+                "p",
+                "h",
+                "8"
+            ],
             "chosen": "h"
         },
         "style": "solid",
@@ -181,7 +362,7 @@
                         "dot",
                         "circo"
                     ],
-                    "chosen": 1
+                    "chosen": 0
                 },
                 "root": "None"
             },

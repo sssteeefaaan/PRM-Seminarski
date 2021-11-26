@@ -7,7 +7,6 @@ import os
 
 setrecursionlimit(1000000)
 
-
 def downloadXMLFiles(urls, downloadLoc='downloads/'):
 
     if not os.path.exists(downloadLoc):
