@@ -5,12 +5,7 @@
             "c": 0,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -21,14 +16,9 @@
             "c": 0.12,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "dateCmp"
                 ],
-                "chosen": 1
+                "chosen": 0
             },
             "xml_parser": "date"
         },
@@ -37,14 +27,9 @@
             "c": 0.08,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "timeCmp"
                 ],
-                "chosen": 2
+                "chosen": 0
             },
             "xml_parser": "time"
         },
@@ -53,14 +38,9 @@
             "c": 0.02,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "sessionCmp"
                 ],
-                "chosen": 3
+                "chosen": 0
             },
             "xml_parser": "sessionduration"
         },
@@ -69,11 +49,6 @@
             "c": 0.02,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
                     "portCmp"
                 ],
                 "chosen": 0
@@ -85,12 +60,7 @@
             "c": 0.02,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -101,14 +71,12 @@
             "c": 0.2,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
                     "addressCmp",
-                    "portCmp"
+                    "addressCmpClassA",
+                    "addressCmpClassB",
+                    "addressCmpClassC"
                 ],
-                "chosen": 4
+                "chosen": 3
             },
             "xml_parser": "address"
         },
@@ -117,14 +85,9 @@
             "c": 0.15,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
                     "portCmp"
                 ],
-                "chosen": 5
+                "chosen": 0
             },
             "xml_parser": "sport"
         },
@@ -133,12 +96,7 @@
             "c": 0.02,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -149,14 +107,12 @@
             "c": 0.1,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
                     "addressCmp",
-                    "portCmp"
+                    "addressCmpClassA",
+                    "addressCmpClassB",
+                    "addressCmpClassC"
                 ],
-                "chosen": 4
+                "chosen": 3
             },
             "xml_parser": "Address address"
         },
@@ -165,14 +121,9 @@
             "c": 0.1,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
                     "portCmp"
                 ],
-                "chosen": 5
+                "chosen": 0
             },
             "xml_parser": "dport"
         },
@@ -181,12 +132,7 @@
             "c": 0.15,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -197,12 +143,7 @@
             "c": 0.02,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -213,12 +154,7 @@
             "c": 0,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -229,12 +165,7 @@
             "c": 0,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -245,12 +176,7 @@
             "c": 0,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },
@@ -261,12 +187,7 @@
             "c": 0,
             "h": {
                 "options": [
-                    "equals",
-                    "dateCmp",
-                    "timeCmp",
-                    "sessionCmp",
-                    "addressCmp",
-                    "portCmp"
+                    "equals"
                 ],
                 "chosen": 0
             },

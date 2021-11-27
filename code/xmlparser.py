@@ -3,15 +3,18 @@ import requests
 import xml.etree.ElementTree as ET
 from sys import setrecursionlimit
 from urllib.request import urlopen
-import os
+from os import makedirs
+from os.path import exists
+from traceback import print_exc
 
 setrecursionlimit(1000000)
 
 def checkDir(dir):
-    if not os.path.exists(dir):
-        print(f"Path '{dir}' doesn't exist!")
-        os.mkdir(dir)
-        print(str.format("Path '{dir}' created!"))
+    if not exists(dir):
+        try:
+            makedirs(dir)
+        except BaseException as e:
+            print(str.format("Path '{dir}' created!"), e)
 
 
 def downloadXMLFiles(urls, downloadLoc='downloads/'):
@@ -19,7 +22,7 @@ def downloadXMLFiles(urls, downloadLoc='downloads/'):
     files = []
     for url in urls:
         name = (downloadLoc + " ".join(url.split("/")[-4:])).replace("_", "-")
-        if not os.path.exists(name):
+        if not exists(name):
             print(f'Downloading \'{url}\'')
             try:
                 data = requests.get(url).content
@@ -27,9 +30,9 @@ def downloadXMLFiles(urls, downloadLoc='downloads/'):
                     f.write(data)
                 print('Done')
             except BaseException as err:
-                er = err.__str__()
+                print_exc()
                 print(
-                    f"Error '{er}' occurred while downloading '{url}'! Skipping")
+                    f"Error occurred while downloading '{url}'! Skipping")
         else:
             print(f"File '{name}' exists! Skipping...")
         files.append(name)
@@ -55,9 +58,9 @@ def downloadXML(url, fileName=""):
         with open(name, 'wb') as f:
             f.write(data)
     except BaseException as err:
-        er = err.__str__()
+        print_exc()
         print(
-            f"Error '{er}' occurred while downloading '{url}'! Skipping")
+            f"Error occurred while downloading '{url}'! Skipping")
     return name.removesuffix(".xml")
 
 
@@ -96,8 +99,8 @@ def parseXML(xmlfile):
             parsRec(parsedRows[-1], x)
 
     except BaseException as err:
-        er = err.__str__()
-        print(f"Error '{er}' occurred! Skipping '{xmlfile}' ...")
+        print_exc()
+        print(f"Error occurred! Skipping '{xmlfile}' ...")
 
     return parsedRows
 
@@ -113,8 +116,8 @@ def parseXMLFromUrl(url):
                 parsRec(parsedRows[-1], x)
 
     except BaseException as err:
-        er = err.__str__()
-        print(f"Error '{er}' occurred! Skipping '{url}' ...")
+        print_exc()
+        print(f"Error occurred! Skipping '{url}' ...")
 
     return parsedRows
 
@@ -128,6 +131,6 @@ def savetoCSV(parsedData, fileName, dataLoc='data/'):
             writer.writeheader()
             writer.writerows(parsedData)
     except BaseException as err:
-        er = err.__str__()
+        print_exc()
         print(
-            f"Error '{er}' occurred! Skipping csv saving of '{fileName}' ...")
+            f"Error occurred! Skipping csv saving of '{fileName}' ...")

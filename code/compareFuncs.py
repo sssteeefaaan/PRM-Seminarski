@@ -1,5 +1,5 @@
 import datetime as dt
-import itertools as it
+from functools import partial
 import ipaddress as ip
 
 
@@ -8,10 +8,8 @@ def F(a1: tuple, a2: tuple, c: tuple, h: tuple) -> float:
         return 0
 
     ret = 0.0
-
     for i in range(0, len(a1)):
         ret += c[i] * h[i](a1[i], a2[i])
-
     return ret
 
 
@@ -65,17 +63,6 @@ def sessionCmp(a, b):
 
     return 1 / (delta.seconds + 1)
 
-# def sourceAddressCmp(a, b):
-#     if a == b:
-#         return 1
-
-#     ipA = ip.ip_address(a)
-#     ipB = ip.ip_address(b)
-
-#     rez = int(ipA) - int(ipB)
-
-#     return 1 / (1 << abs(rez))
-
 
 def addressCmp(a, b):
     if a == b:
@@ -90,6 +77,21 @@ def addressCmp(a, b):
     rez = int(ipA) - int(ipB)
 
     return 1 / (abs(rez) + 1)
+
+
+def addressCmpWithMask(a, b, network=None):
+    if a == b:
+        return 1
+
+    if (not a) or (not b):
+        return 0
+
+    ipA = ip.ip_address(a)
+    ipB = ip.ip_address(b)
+
+    if ipA in network and ipB in network:
+        return 1
+    return 0
 
 
 def portCmp(a, b):
@@ -109,5 +111,8 @@ funcs = {
     "timeCmp": timeCmp,
     "sessionCmp": sessionCmp,
     "addressCmp": addressCmp,
+    "addressCmpClassA": partial(addressCmpWithMask, network=ip.ip_network("255.0.0.0")),
+    "addressCmpClassB": partial(addressCmpWithMask, network=ip.ip_network("255.255.0.0")),
+    "addressCmpClassC": partial(addressCmpWithMask, network=ip.ip_network("255.255.255.0")),
     "portCmp": portCmp
 }

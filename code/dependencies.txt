@@ -1,6 +1,0 @@
-matplotlib
-networkx
-requests
-scipy
-pydot
-graphviz
