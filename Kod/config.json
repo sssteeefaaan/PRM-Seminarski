@@ -195,12 +195,12 @@
         }
     },
     "display": {
-        "t": 0.65,
+        "t": 0.5,
         "window_name": "Vizualizacija klasterizacije IDS alerta",
         "refresh_rate": 0.001,
         "pause_key": " ",
         "unpause_key": "escape",
-        "fifo_count": 50,
+        "fifo_count": 100,
         "node_colors": [
             "#FFFF00",
             "#66CDAA",
@@ -340,16 +340,12 @@
     },
     "data_source": {
         "files": [
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
             "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",
             "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-4.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-dmz mid-level-phase-5.xml",
             "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-1.xml",
             "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-2.xml",
             "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-3.xml",
             "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-4.xml",
-            "downloads/LLS-DDOS-1.0 data-and-labeling tcpdump-inside mid-level-phase-5.xml",
             "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-1.xml",
             "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-2.xml",
             "downloads/LLS-DDOS-2.0.2 data-and-labeling tcpdump-dmz mid-level-phase-3.xml",

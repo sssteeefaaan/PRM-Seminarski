@@ -1,11 +1,11 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from alert import Alert
-from compareFuncs import F
+from comparefunctions import Fsim
 from xmlparser import parseXML, savetoCSV
 import datetime as dt
-from layout import layout_types
-from unload import *
+from graphlayouts import layout_types
+from unloadconfiguration import *
 from os import _exit
 
 
@@ -15,8 +15,10 @@ def on_key(event, figure=None, pause_key=" ", unpause_key="escape"):
     if event.key == unpause_key:
         figure.canvas.stop_event_loop()
 
+
 def on_close(event):
     _exit(1)
+
 
 def visualize(attributes={}, data_source={}, display={}, optional={}):
 
@@ -32,7 +34,8 @@ def visualize(attributes={}, data_source={}, display={}, optional={}):
     mng.set_window_title(disp['window_name'])
     fig = plt.figure(1)
 
-    fig.canvas.mpl_connect('key_release_event', lambda event: on_key(event, figure=fig, pause_key=disp['pause_key'], unpause_key=disp['unpause_key']))
+    fig.canvas.mpl_connect('key_release_event', lambda event: on_key(
+        event, figure=fig, pause_key=disp['pause_key'], unpause_key=disp['unpause_key']))
     fig.canvas.mpl_connect('close_event', on_close)
 
     i = 0
@@ -55,9 +58,10 @@ def visualize(attributes={}, data_source={}, display={}, optional={}):
             max = [0, a]
 
             for node in partial:
-                weight = F(a.vector, node.vector, c, h)
+                weight = Fsim(a.vector, node.vector, c, h)
                 if weight >= disp['t']:
-                    G.add_weighted_edges_from([(node.dict['alertid'], a.dict['alertid'], weight)])
+                    G.add_weighted_edges_from(
+                        [(node.dict['alertid'], a.dict['alertid'], weight)])
 
                     if weight > max[0]:
                         max = [weight, node]
@@ -70,7 +74,8 @@ def visualize(attributes={}, data_source={}, display={}, optional={}):
 
             a.color = color_map[-1]
 
-            mypos = layout_types[disp['layout']['name']](G, dict(disp['layout']))
+            mypos = layout_types[disp['layout']['name']](
+                G, dict(disp['layout']))
 
             nx.draw_networkx(G,
                              pos=mypos,

@@ -3,7 +3,10 @@ import networkx as nx
 
 def bipartite(G: nx.Graph, d):
     align = d['align']
-    return nx.drawing.layout.bipartite_layout(G, nodes=G.nodes, align=align['options'][align['chosen']], scale=d['scale'], aspect_ratio=d['aspect_ratio'])
+    return nx.drawing.layout.bipartite_layout(
+        G, nodes=G.nodes, align=align['options'][align['chosen']],
+        scale=d['scale'],
+        aspect_ratio=d['aspect_ratio'])
 
 
 def circular(G, d):

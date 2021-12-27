@@ -9,6 +9,7 @@ from traceback import print_exc
 
 setrecursionlimit(1000000)
 
+
 def checkDir(dir):
     if not exists(dir):
         try:
@@ -127,7 +128,7 @@ def savetoCSV(parsedData, fileName, dataLoc='data/'):
 
     try:
         with open(dataLoc + fileName + ".csv", 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=parsedData[0].keys())
+            writer = csv.DictWriter(csvfile, fieldnames=parsedData[0].keys(), restval="unknown", delimiter=";")
             writer.writeheader()
             writer.writerows(parsedData)
     except BaseException as err:

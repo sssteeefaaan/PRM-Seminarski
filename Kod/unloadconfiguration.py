@@ -1,11 +1,12 @@
-from compareFuncs import funcs
+from comparefunctions import funcs
 from operator import add
 from functools import reduce
 from xmlparser import downloadXMLFiles, checkDir
 
 
 def unloadAttributes(attributes={}):
-    meta = list(filter(lambda x: x[1] != 0 or x[0] == "alertid", [(attributes[x].get("xml_parser", ""), attributes[x].get("c", 0), funcs.get(attributes[x].get("h", {}).get("options", {})[attributes[x].get("h", {}).get("chosen", 0)], "")) for x in attributes if attributes[x].get("use", False)]))
+    meta = list(filter(lambda x: x[1] != 0 or x[0] == "alertid", [(attributes[x].get("xml_parser", ""), attributes[x].get("c", 0), funcs.get(
+        attributes[x].get("h", {}).get("options", {})[attributes[x].get("h", {}).get("chosen", 0)], "")) for x in attributes if attributes[x].get("use", False)]))
     if meta[0][0] != "alertid":
         raise BaseException("alerid MUST BE USED!")
 

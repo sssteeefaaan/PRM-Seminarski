@@ -3,7 +3,7 @@ from functools import partial
 import ipaddress as ip
 
 
-def F(a1: tuple, a2: tuple, c: tuple, h: tuple) -> float:
+def Fsim(a1: tuple, a2: tuple, c: tuple, h: tuple) -> float:
     if len(a1) != len(a2) or len(a1) != len(c) or len(a1) != len(h):
         return 0
 
@@ -105,7 +105,7 @@ def portCmp(a, b):
 
 
 funcs = {
-    "F": F,
+    "Fsim": Fsim,
     "equals": equals,
     "dateCmp": dateCmp,
     "timeCmp": timeCmp,
